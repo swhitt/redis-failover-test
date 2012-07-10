@@ -50,6 +50,8 @@ client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
 ```
 You'll now have a `client` object that has the same interface as a normal `redis`-gem client object that always communicates directly with the current master redis instance. 
 
+Resque
+------
 If you'd like to use Resque with our failover-friendly Redis client, you can set the Redis client that Resque uses like this:
 
 ```ruby
