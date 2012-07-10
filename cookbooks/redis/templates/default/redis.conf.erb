@@ -1,0 +1,17 @@
+port <%= node[:redis][:port] %>
+loglevel <%= node[:redis][:loglevel] %>
+dir <%= node[:redis][:data_dir] %>
+
+
+daemonize no
+logfile stdout
+databases 16
+save 900 1
+save 300 10
+save 60 10000
+rdbcompression yes
+dbfilename dump.rdb
+
+<% if node[:redis][:slave] %>
+slaveof <%= node[:redis][:slave] %> <%= node[:redis][:port] %>
+<% end %>

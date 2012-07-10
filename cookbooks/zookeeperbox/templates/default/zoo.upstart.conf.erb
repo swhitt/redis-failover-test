@@ -1,0 +1,11 @@
+#!upstart
+description "Zookeeper Server"
+
+env USER=vagrant
+
+start on startup
+stop on shutdown
+
+respawn
+
+exec sudo -u $USER sh -c "/home/vagrant/zookeeper/bin/zkServer.sh start-foreground"
