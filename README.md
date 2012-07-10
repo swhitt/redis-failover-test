@@ -49,3 +49,24 @@ require 'redis-failover'
 client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
 ```
 You'll now have a `client` object that has the same interface as a normal `redis`-gem client object that always communicates directly with the current master redis instance. 
+
+If you'd like to use Resque with our failover-friendly Redis client, you can set the Redis client that Resque uses like this:
+
+```ruby
+failover_client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
+Resque.redis = failover_client
+```
+
+Testing Failover
+----------------
+You can shutdown individual instances of Redis in order to verify that the failover configuration is working. Replace `redis_master` with `redis_slave` in the following example if you'd like to shutdown the slave.
+
+    host$ vagrant ssh redis_master
+    ...
+    ...
+    vagrant@lucid32:~$ sudo initctl stop redis
+    redis stop/waiting
+    vagrant@lucid32:~$ 
+
+You can bring the instance up with `sudo initctl start redis`.
+
