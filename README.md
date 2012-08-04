@@ -1,7 +1,7 @@
 redis-failover-test
 ===================
 
-This setup will start up 3 separate VMs using vagrant in order to simulate a 2-server Redis installation and a single-server Apache ZooKeeper installation in order to test the `redis-failover` gem in a non-trivial configuration.
+This setup will start up 3 separate VMs using vagrant in order to simulate a 2-server Redis installation and a single-server Apache ZooKeeper installation in order to test the [`redis-failover`](https://github.com/ryanlecompte/redis_failover) gem in a non-trivial configuration.
 
 How to Start
 ------------
@@ -31,6 +31,8 @@ Or, you can access the machines individually by using the host-only IP addresses
   </tr>
 </table>
 
+If for some reason these IPs do not work for your network configuration you can change them by modifying the Vagrantfile's 'hostonly' and chef 'slave' lines.
+
 Using `redis_node_manager`
 --------------------------
 To set up Redis Node Manager (this handles the actual failing-over and provides a view at the console of what's going on in the entire system), `vagrant ssh zookeper` and run the following from the home directory:
@@ -41,6 +43,8 @@ This will check all of the Redis instances in the list provided by the YAML file
 
 Connecting to redis using RedisFailover
 ---------------------------------------
+You can now connect to the `redis-failover` managed farm from your host machine. You can do this by creating an instance of the `RedisFailover::Client` class and specifying the zookeper virtual machine's IP.
+
 ```ruby
 require 'rubygems'
 require 'bundler/setup'
@@ -48,7 +52,7 @@ require 'bundler/setup'
 require 'redis-failover'
 client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
 ```
-You'll now have a `client` object that has the same interface as a normal `redis`-gem client object that always communicates directly with the current master redis instance. 
+This `client` object is now an instance of `RedisFailover::Client` which has the magical property of having the same interface of the standard `redis`-gem client object. The only difference is that it now automatically switches to communicate directly with the current master redis instance. 
 
 Resque
 ------
@@ -58,6 +62,8 @@ If you'd like to use Resque with our failover-friendly Redis client, you can set
 failover_client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
 Resque.redis = failover_client
 ```
+
+The `RedisFailover::Client` class has the same interface as the regular `redis` and is completely drop-in compatible. 
 
 Testing Failover
 ----------------
