@@ -31,7 +31,7 @@ Or, you can access the machines individually by using the host-only IP addresses
   </tr>
 </table>
 
-If for some reason these IPs do not work for your network configuration you can change them by modifying the Vagrantfile's 'hostonly' and chef 'slave' lines.
+If for some reason these IPs do not work for your network configuration you can change them by modifying the `Vagrantfile`'s 'hostonly' and chef 'slave' lines, as well as the `redis_node_manager.yml.erb` file under the `zookeeperbox` chef recipe.
 
 Using `redis_node_manager`
 --------------------------
