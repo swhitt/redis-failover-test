@@ -21,13 +21,13 @@ Or, you can access the machines individually by using the host-only IP addresses
     <th>IP</th><th>Machine</th>
   </tr>
   <tr>
-    <td>`192.168.50.10`</td><td>`zookeeper`</td>
+    <td><code>192.168.50.10</code></td><td><code>zookeeper</code></td>
   </tr>
   <tr>
-    <td>`192.168.50.20`</td><td>`redis_master`</td>
+    <td><code>192.168.50.20</code></td><td><code>redis_master</code></td>
   </tr>
     <tr>
-    <td>`192.168.50.21`</td><td>`redis_slave`</td>
+    <td><code>192.168.50.21</code></td><td><code>redis_slave</code></td>
   </tr>
 </table>
 
