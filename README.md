@@ -1,7 +1,7 @@
 redis-failover-test
 ===================
 
-This setup will start up 3 separate VMs using vagrant in order to simulate a 2-server Redis installation and a single-server Apache ZooKeeper installation in order to test the [`redis-failover`](https://github.com/ryanlecompte/redis_failover) gem in a non-trivial configuration.
+This setup will start up 3 separate VMs using [Vagrant](http://vagrantup.com/) in order to simulate a 2-server Redis installation and a single-server Apache ZooKeeper installation in order to test the [`redis_failover`](https://github.com/ryanlecompte/redis_failover) gem in a non-trivial configuration. All configuration management of the virutal machines is done using [Chef](http://www.opscode.com/chef/) cookbooks.
 
 How to Start
 ------------
@@ -21,13 +21,13 @@ Or, you can access the machines individually by using the host-only IP addresses
     <th>IP</th><th>Machine</th>
   </tr>
   <tr>
-    <td>192.168.50.10</td><td>zookeeper</td>
+    <td>`192.168.50.10`</td><td>`zookeeper`</td>
   </tr>
   <tr>
-    <td>192.168.50.20</td><td>redis_master</td>
+    <td>`192.168.50.20`</td><td>`redis_master`</td>
   </tr>
     <tr>
-    <td>192.168.50.21</td><td>redis_slave</td>
+    <td>`192.168.50.21`</td><td>`redis_slave`</td>
   </tr>
 </table>
 
@@ -43,7 +43,7 @@ This will check all of the Redis instances in the list provided by the YAML file
 
 Connecting to redis using RedisFailover
 ---------------------------------------
-You can now connect to the `redis-failover` managed farm from your host machine. You can do this by creating an instance of the `RedisFailover::Client` class and specifying the zookeper virtual machine's IP.
+You can now connect to the `redis_failover` managed farm from your host machine. You can do this by creating an instance of the `RedisFailover::Client` class and specifying the zookeper virtual machine's IP.
 
 ```ruby
 require 'rubygems'
@@ -52,7 +52,7 @@ require 'bundler/setup'
 require 'redis-failover'
 client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
 ```
-This `client` object is now an instance of `RedisFailover::Client` which has the magical property of having the same interface of the standard `redis`-gem client object. The only difference is that it now automatically switches to communicate directly with the current master redis instance. 
+This `client` object is now an instance of `RedisFailover::Client` which has the magical property of having the same interface of the standard `redis-rb`-gem client object. The only difference is that it now automatically switches to communicate directly with the current master Redis instance. 
 
 Resque
 ------
