@@ -2,7 +2,7 @@ require_recipe "rvm::system"
 require_recipe "rvm::vagrant"
 
 rvm_gem "redis_failover" do
-  ruby_string "ruby-1.9.3-p194"
+  ruby_string "ruby-1.9.3-p327"
   action      :install
 end
 
