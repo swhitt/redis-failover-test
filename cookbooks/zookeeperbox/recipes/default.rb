@@ -11,7 +11,7 @@ package "openjdk-6-jre-headless" do
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/zookeeper.tar.gz" do
-  source "http://apache.deathculture.net/zookeeper/zookeeper-3.3.5/zookeeper-3.3.5.tar.gz"
+  source "http://www.gtlib.gatech.edu/pub/apache/zookeeper/zookeeper-3.4.5/zookeeper-3.4.5.tar.gz"
   action :create_if_missing
 end
 
@@ -19,7 +19,7 @@ bash "open_zookeeper_up" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
     tar zxf zookeeper.tar.gz
-    mv zookeeper-3.3.5 /home/vagrant/zookeeper
+    mv zookeeper-3.4.5 /home/vagrant/zookeeper
   EOH
   creates "/home/vagrant/zookeeper"
 end
