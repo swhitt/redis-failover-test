@@ -35,7 +35,7 @@ If for some reason these IPs do not work for your network configuration you can 
 
 Using `redis_node_manager`
 --------------------------
-To set up Redis Node Manager (this handles the actual failing-over and provides a view at the console of what's going on in the entire system), `vagrant ssh zookeper` and run the following from the home directory:
+To set up Redis Node Manager (this handles the actual failing-over and provides a view at the console of what's going on in the entire system), `vagrant ssh zookeeper` and run the following from the home directory:
 
     redis_node_manager -C redis_node_manager.yml
 
