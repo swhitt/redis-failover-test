@@ -6,7 +6,7 @@ This setup will start up 3 separate VMs using [Vagrant](http://vagrantup.com/) i
 How to Start
 ------------
 
-To download the base box and start/configure the 3 VMs, run `vagrant up` in the root of the project. It may take a while the first time you start it as it has to compile ruby and redis as well as install a few packages.
+To download the base box and start/configure the 3 VMs, run `git submodule init && git submodule update && vagrant up` in the root of the project. It may take a while the first time you start it as it has to compile ruby and redis as well as install a few packages.
 
 Once this is finished, you can connect to the different boxes using the `vagrant ssh` command:
 
