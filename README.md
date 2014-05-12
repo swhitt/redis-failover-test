@@ -49,7 +49,7 @@ You can now connect to the `redis_failover` managed farm from your host machine.
 require 'rubygems'
 require 'bundler/setup'
 
-require 'redis-failover'
+require 'redis_failover'
 client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
 ```
 This `client` object is now an instance of `RedisFailover::Client` which has the magical property of having the same interface of the standard `redis-rb`-gem client object. The only difference is that it now automatically switches to communicate directly with the current master Redis instance. 
