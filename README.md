@@ -6,7 +6,7 @@ This setup will start up 3 separate VMs using [Vagrant](http://vagrantup.com/) i
 How to Start
 ------------
 
-To download the base box and start/configure the 3 VMs, run `vagrant up` in the root of the project. It may take a while the first time you start it as it has to compile ruby and redis as well as install a few packages.
+To download the base box and start/configure the 3 VMs, run `git submodule init && git submodule update && vagrant up` in the root of the project. It may take a while the first time you start it as it has to compile ruby and redis as well as install a few packages.
 
 Once this is finished, you can connect to the different boxes using the `vagrant ssh` command:
 
@@ -35,7 +35,7 @@ If for some reason these IPs do not work for your network configuration you can 
 
 Using `redis_node_manager`
 --------------------------
-To set up Redis Node Manager (this handles the actual failing-over and provides a view at the console of what's going on in the entire system), `vagrant ssh zookeper` and run the following from the home directory:
+To set up Redis Node Manager (this handles the actual failing-over and provides a view at the console of what's going on in the entire system), `vagrant ssh zookeeper` and run the following from the home directory:
 
     redis_node_manager -C redis_node_manager.yml
 
@@ -49,7 +49,7 @@ You can now connect to the `redis_failover` managed farm from your host machine.
 require 'rubygems'
 require 'bundler/setup'
 
-require 'redis-failover'
+require 'redis_failover'
 client = RedisFailover::Client.new(:zkservers => '192.168.50.10:2181')
 ```
 This `client` object is now an instance of `RedisFailover::Client` which has the magical property of having the same interface of the standard `redis-rb`-gem client object. The only difference is that it now automatically switches to communicate directly with the current master Redis instance. 
